@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu:latest
 RUN apt update -y
 RUN DEBIAN_FRONTEND=noninteractive apt upgrade -y
 RUN DEBIAN_FRONTEND=noninteractive apt install -y ffmpeg python3 curl python3-pip python-is-python3
