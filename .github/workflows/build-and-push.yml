@@ -1,0 +1,26 @@
+name: Build & Push lidarr-youtube-downloader
+
+on: 
+  push:
+    branches: 
+      - 'master'
+      - 'main'
+  workflow_dispatch:
+
+jobs:
+  Build-and-Push:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+    - name: Login to Docker
+      env:
+        DOCKER_USER: ${{ secrets.DOCKER_USER }}   
+        DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}  
+      run: |
+        docker login -u $DOCKER_USER -p $DOCKER_TOKEN
+        
+    - name: Build & Push Docker Image
+      run: |
+        docker buildx create --name lidarr-youtube-downloader --use 
+        docker buildx build --push --no-cache -t dazznap/lidarr-youtube-downloader:latest . --platform linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v6,linux/386
