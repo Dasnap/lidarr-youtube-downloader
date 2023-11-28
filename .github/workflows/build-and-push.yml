@@ -23,4 +23,4 @@ jobs:
     - name: Build & Push Docker Image
       run: |
         docker buildx create --name lidarr-youtube-downloader --use 
-        docker buildx build --push --no-cache -t dazznap/lidarr-youtube-downloader:latest .
+        docker buildx build --push --no-cache -t dazznap/lidarr-youtube-downloader:latest . --platform linux/amd64,linux/arm64
